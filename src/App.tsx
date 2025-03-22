@@ -16,17 +16,13 @@ import SettingsFocusedIcon from '../assets/settings_focused.png'
 const Tab = createBottomTabNavigator()
 
 interface ButtonTabBarButtonProps {
-  children: React.ReactNode
   onPress?: (event: GestureResponderEvent) => void
   accessibilityLabel?: string
+  children: React.ReactNode
 }
 
 const options = {
-  tabBarButton: (props: ButtonTabBarButtonProps) => <TabBarButton {...props} />,
-}
-
-const TabBarButton = ({ children, onPress, accessibilityLabel }: ButtonTabBarButtonProps) => {
-  return (
+  tabBarButton: ({ onPress, accessibilityLabel, children }: ButtonTabBarButtonProps) => (
     <Pressable onPress={onPress} accessibilityLabel={accessibilityLabel}>
       <View
         style={{
@@ -38,7 +34,7 @@ const TabBarButton = ({ children, onPress, accessibilityLabel }: ButtonTabBarBut
         {children}
       </View>
     </Pressable>
-  )
+  ),
 }
 
 const size = { width: 24, height: 24 }
