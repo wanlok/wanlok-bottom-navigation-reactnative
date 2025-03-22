@@ -15,6 +15,8 @@ import SettingsFocusedIcon from '../assets/settings_focused.png'
 
 const Tab = createBottomTabNavigator()
 
+const size = { width: 24, height: 24 }
+
 const App = () => {
   return (
     <NavigationContainer>
@@ -30,10 +32,10 @@ const App = () => {
             } else if (route.name === 'Settings') {
               icon = focused ? SettingsFocusedIcon : SettingsIcon
             }
-            return <Image source={icon} style={{ width: 25, height: 25 }} resizeMode="contain" />
+            return <Image source={icon} style={size} resizeMode="contain" />
           },
           tabBarActiveTintColor: '#0000FF',
-          tabBarInactiveTintColor: '#000000',
+          tabBarInactiveTintColor: '#999999',
         })}
       >
         <Tab.Screen name="Home" component={Home} />
