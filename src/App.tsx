@@ -4,7 +4,7 @@ import Home from './Home'
 import Documents from './Documents'
 import Settings from './Settings'
 import { NavigationContainer } from '@react-navigation/native'
-import { Image } from 'react-native'
+import { GestureResponderEvent, Image, Pressable, View } from 'react-native'
 
 import HomeIcon from '../assets/home.png'
 import HomeFocusedIcon from '../assets/home_focused.png'
@@ -14,6 +14,32 @@ import SettingsIcon from '../assets/settings.png'
 import SettingsFocusedIcon from '../assets/settings_focused.png'
 
 const Tab = createBottomTabNavigator()
+
+interface ButtonTabBarButtonProps {
+  children: React.ReactNode
+  onPress?: (event: GestureResponderEvent) => void
+  accessibilityLabel?: string
+}
+
+const options = {
+  tabBarButton: (props: ButtonTabBarButtonProps) => <TabBarButton {...props} />,
+}
+
+const TabBarButton = ({ children, onPress, accessibilityLabel }: ButtonTabBarButtonProps) => {
+  return (
+    <Pressable onPress={onPress} accessibilityLabel={accessibilityLabel}>
+      <View
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100%',
+        }}
+      >
+        {children}
+      </View>
+    </Pressable>
+  )
+}
 
 const size = { width: 24, height: 24 }
 
@@ -38,9 +64,9 @@ const App = () => {
           tabBarInactiveTintColor: '#999999',
         })}
       >
-        <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Documents" component={Documents} />
-        <Tab.Screen name="Settings" component={Settings} />
+        <Tab.Screen name="Home" component={Home} options={options} />
+        <Tab.Screen name="Documents" component={Documents} options={options} />
+        <Tab.Screen name="Settings" component={Settings} options={options} />
       </Tab.Navigator>
     </NavigationContainer>
   )
